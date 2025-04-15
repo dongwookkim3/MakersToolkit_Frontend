@@ -1,5 +1,5 @@
 #!/bin/sh
 cd ../
 mkdir output
-cp -R ./Frontend/* ./output
-cp -R ./output ./Frontend/
+cp -R ./MakersToolkit_Frontend/* ./output
+cp -R ./output ./MakersToolkit_Frontend/
