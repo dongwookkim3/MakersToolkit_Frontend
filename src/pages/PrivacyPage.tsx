@@ -1,190 +1,216 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Separator } from '@/components/ui/separator';
-import { Shield, Lock, Eye, FileCheck, Clock, HelpCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Shield, CheckCircle, AlertCircle, Lock, FileText, Eye } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-react';
 
 const PrivacyPage = () => {
+  const [activeTab, setActiveTab] = useState('general');
+  const [scrollProgress, setScrollProgress] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const currentScroll = document.documentElement.scrollTop;
+      const progress = (currentScroll / totalScroll) * 100;
+      setScrollProgress(progress);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
+  const privacyCollapsibles = [
+    {
+      title: "개인정보 수집 항목",
+      content: "당사는 회원 가입, 서비스 이용, 상담 및 문의 등을 위해 다음과 같은 개인정보를 수집합니다: 이름, 이메일 주소, 휴대폰 번호, 주소, 결제 정보 등. 필수 정보와 선택 정보를 구분하여 수집하며, 필수 정보만으로도 서비스 이용이 가능합니다."
+    },
+    {
+      title: "개인정보 이용 목적",
+      content: "수집한 개인정보는 서비스 제공 및 개선, 신규 서비스 개발, 회원 관리, 마케팅 및 광고, 법령 준수 등의 목적으로 이용됩니다. 이용자의 동의 없이 개인정보를 제3자에게 제공하거나 목적 외로 이용하지 않습니다."
+    },
+    {
+      title: "개인정보 보관 기간",
+      content: "개인정보는 서비스 제공을 위해 필요한 기간 동안만 보관하며, 목적 달성 후에는 지체 없이 파기합니다. 다만, 관련 법령에 따라 보존할 필요가 있는 경우에는 해당 기간 동안 보관할 수 있습니다(예: 전자상거래법에 따른 거래기록 보관 등)."
+    },
+    {
+      title: "개인정보 보호 조치",
+      content: "당사는 개인정보의 안전한 관리를 위해 암호화, 접근 제한, 보안 프로그램 설치 등 기술적·관리적 보호 조치를 취하고 있습니다. 또한 개인정보 취급자를 최소한으로 제한하고 정기적인 교육을 실시하고 있습니다."
+    },
+    {
+      title: "이용자의 권리와 행사 방법",
+      content: "이용자는 언제든지 자신의 개인정보를 조회, 수정, 삭제할 수 있습니다. 개인정보 처리 동의를 철회하거나 개인정보의 오류 수정을 요청할 수 있으며, 이러한 권리는 서비스 내 '마이페이지' 또는 고객센터를 통해 행사할 수 있습니다."
+    }
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
+      {/* 스크롤 진행 표시줄 */}
+      <div 
+        className="fixed top-0 left-0 h-1 bg-primary z-50 transition-all duration-300" 
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
       <Navbar />
-      <div className="flex-grow">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold mb-6">개인정보처리방침</h1>
-            <p className="text-gray-500 mb-8">최종 업데이트: 2024년 4월 16일</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex flex-col items-center text-center">
-                    <Shield className="h-12 w-12 text-primary mb-4" />
-                    <h3 className="font-medium text-lg mb-2">개인정보 보호</h3>
-                    <p className="text-gray-600 text-sm">최고 수준의 보안 조치로 고객 정보를 안전하게 보호합니다</p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex flex-col items-center text-center">
-                    <Lock className="h-12 w-12 text-primary mb-4" />
-                    <h3 className="font-medium text-lg mb-2">안전한 결제</h3>
-                    <p className="text-gray-600 text-sm">모든 결제 정보는 암호화되어 처리됩니다</p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex flex-col items-center text-center">
-                    <Eye className="h-12 w-12 text-primary mb-4" />
-                    <h3 className="font-medium text-lg mb-2">투명한 정책</h3>
-                    <p className="text-gray-600 text-sm">개인정보 수집 및 이용에 대해 명확하게 안내합니다</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            
-            <Separator className="my-8" />
-            
-            <div className="space-y-12">
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">1. 개인정보 수집 항목</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  메이커스 툴킷(이하 "회사")은 서비스 제공을 위해 아래와 같은 개인정보를 수집합니다.
-                </p>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="font-medium mb-3">필수 수집 항목</h3>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-700 mb-6">
-                    <li>이름, 이메일 주소, 비밀번호</li>
-                    <li>휴대전화 번호</li>
-                    <li>배송 주소 (제품 구매 시)</li>
-                    <li>결제 정보 (신용카드 정보, 계좌번호 등)</li>
-                  </ul>
-                  
-                  <h3 className="font-medium mb-3">선택 수집 항목</h3>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                    <li>직업, 소속 기관</li>
-                    <li>관심 분야, 보유 기술</li>
-                    <li>서비스 이용 기록, 접속 로그, 쿠키, IP 주소</li>
-                  </ul>
-                </div>
-              </section>
-              
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">2. 개인정보 수집 및 이용 목적</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.
-                </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                  <li>회원 관리: 회원제 서비스 이용, 개인식별, 불량회원의 부정 이용 방지, 가입 의사 확인, 불만 처리 등 민원처리, 공지사항 전달</li>
-                  <li>서비스 제공: 제품 주문, 배송, 설치, 기술 지원, 콘텐츠 제공, 맞춤 서비스 제공</li>
-                  <li>마케팅 및 광고: 이벤트 정보 및 참여 기회 제공, 서비스 안내, 신규 서비스 개발 및 특화, 인구통계학적 특성에 따른 서비스 제공</li>
-                  <li>통계 및 서비스 개선: 접속 빈도 파악, 서비스 이용에 대한 통계, 서비스 개선을 위한 연구</li>
-                </ul>
-              </section>
-              
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">3. 개인정보의 보유 및 이용 기간</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  회사는 이용자의 개인정보를 원칙적으로 개인정보 수집 및 이용 목적이 달성된 후에는 지체 없이 파기합니다. 단, 관련 법령에 의해 보존해야 하는 경우는 다음과 같습니다.
-                </p>
-                <table className="w-full border-collapse mb-4">
-                  <thead>
-                    <tr className="bg-gray-100">
-                      <th className="border p-3 text-left">보존 항목</th>
-                      <th className="border p-3 text-left">보존 기간</th>
-                      <th className="border p-3 text-left">보존 근거</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border p-3">계약 또는 청약철회 등에 관한 기록</td>
-                      <td className="border p-3">5년</td>
-                      <td className="border p-3">전자상거래 등에서의 소비자 보호에 관한 법률</td>
-                    </tr>
-                    <tr>
-                      <td className="border p-3">대금결제 및 재화 등의 공급에 관한 기록</td>
-                      <td className="border p-3">5년</td>
-                      <td className="border p-3">전자상거래 등에서의 소비자 보호에 관한 법률</td>
-                    </tr>
-                    <tr>
-                      <td className="border p-3">소비자의 불만 또는 분쟁처리에 관한 기록</td>
-                      <td className="border p-3">3년</td>
-                      <td className="border p-3">전자상거래 등에서의 소비자 보호에 관한 법률</td>
-                    </tr>
-                    <tr>
-                      <td className="border p-3">웹사이트 방문기록</td>
-                      <td className="border p-3">3개월</td>
-                      <td className="border p-3">통신비밀보호법</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">4. 개인정보 제3자 제공</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다.
-                </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                  <li>이용자가 사전에 동의한 경우</li>
-                  <li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
-                  <li>통계작성, 학술연구 또는 시장조사를 위하여 필요한 경우로서 특정 개인을 식별할 수 없는 형태로 제공하는 경우</li>
-                </ul>
-              </section>
-              
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">5. 이용자의 권리와 행사 방법</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  이용자는 개인정보 보호법 제4조에 따라 언제든지 개인정보 열람, 정정, 삭제, 처리정지 요구 등의 권리를 행사할 수 있습니다.
-                </p>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  권리 행사는 회사에 대해 서면, 전화, 이메일, 팩스 등을 통하여 하실 수 있으며 회사는 이에 대해 지체 없이 조치하겠습니다.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통해서도 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.
-                </p>
-              </section>
-              
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">6. 개인정보 자동 수집 장치의 설치/운영 및 거부에 관한 사항</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  회사는 이용자의 서비스 이용 편의를 위해 쿠키(cookie)를 사용합니다. 쿠키는 웹사이트가 이용자의 컴퓨터 브라우저에 전송하는 소량의 정보입니다.
-                </p>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  이용자는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서 이용자는 웹 브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.
-                </p>
-              </section>
-              
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">7. 개인정보 보호책임자</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 이용자의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.
-                </p>
-                <div className="bg-gray-50 p-6 rounded-lg mb-4">
-                  <h3 className="font-medium mb-3">개인정보 보호책임자</h3>
-                  <ul className="list-none space-y-2 text-gray-700">
-                    <li>성명: 홍길동</li>
-                    <li>직위: 개인정보보호 책임자</li>
-                    <li>연락처: privacy@makerstoolkit.com</li>
-                  </ul>
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  이용자는 회사의 서비스를 이용하면서 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자에게 문의하실 수 있습니다. 회사는 이용자의 문의에 대해 지체 없이 답변 및 처리해드릴 것입니다.
-                </p>
-              </section>
-            </div>
-            
-            <div className="mt-12 p-6 bg-gray-50 rounded-lg">
-              <p className="text-gray-700">
-                이 개인정보처리방침에 대해 질문이 있으시면 <a href="mailto:privacy@makerstoolkit.com" className="text-primary hover:underline">privacy@makerstoolkit.com</a>으로 문의해 주세요.
-              </p>
-            </div>
+      
+      <main className="flex-grow container mx-auto px-4 py-16 mt-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-4">
+            <Shield className="w-8 h-8 text-primary" />
           </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">개인정보처리방침</h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Maker's Toolkit은 고객의 개인정보를 소중히 여기며 개인정보보호법을 준수합니다.
+          </p>
+        </motion.div>
+
+        <div className="max-w-4xl mx-auto">
+          <Card className="border-none shadow-lg mb-8 overflow-hidden">
+            <div className="bg-gradient-to-r from-primary/80 to-primary p-6 text-white">
+              <h2 className="text-2xl font-bold flex items-center">
+                <Lock className="mr-2" /> 개인정보 보호 약속
+              </h2>
+            </div>
+            <CardContent className="p-6">
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-gray-700"
+              >
+                Maker's Toolkit은 이용자의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
+              </motion.p>
+            </CardContent>
+          </Card>
+
+          <Tabs defaultValue="general" value={activeTab} onValueChange={setActiveTab} className="mb-12">
+            <TabsList className="grid grid-cols-3 mb-8">
+              <TabsTrigger value="general" className="data-[state=active]:bg-primary data-[state=active]:text-white">일반 정보</TabsTrigger>
+              <TabsTrigger value="collection" className="data-[state=active]:bg-primary data-[state=active]:text-white">정보 수집 및 이용</TabsTrigger>
+              <TabsTrigger value="protection" className="data-[state=active]:bg-primary data-[state=active]:text-white">보호 조치</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="general" className="space-y-4">
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
+                {[
+                  { icon: <FileText className="w-6 h-6 text-primary" />, title: "방침 시행일", content: "이 개인정보처리방침은 2025년 4월 16일부터 시행됩니다." },
+                  { icon: <Eye className="w-6 h-6 text-primary" />, title: "방침 변경 고지", content: "개인정보처리방침이 변경되는 경우 변경 사항을 웹사이트에 공지합니다." }
+                ].map((item, index) => (
+                  <motion.div key={index} variants={item} className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow border border-gray-100">
+                    <div className="flex items-start">
+                      <div className="mr-4 bg-primary/10 p-3 rounded-full">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                        <p className="text-gray-600">{item.content}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </TabsContent>
+            
+            <TabsContent value="collection">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    {privacyCollapsibles.map((item, index) => (
+                      <Collapsible key={index} className="border rounded-lg overflow-hidden">
+                        <CollapsibleTrigger asChild>
+                          <Button variant="ghost" className="flex w-full justify-between p-4 font-medium">
+                            <span>{item.title}</span>
+                            <ChevronDown className="h-4 w-4 transition-transform duration-200 ui-open:rotate-180" />
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="p-4 pt-0 border-t bg-gray-50">
+                          <p className="text-gray-700">{item.content}</p>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="protection">
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 gap-6"
+              >
+                {[
+                  { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "기술적 보호 조치", content: "개인정보를 안전하게 처리하기 위한 내부 관리계획 수립, 접근 통제 시스템 설치, 고유식별정보 등의 암호화, 보안 프로그램 설치 등의 기술적 조치를 하고 있습니다." },
+                  { icon: <AlertCircle className="w-6 h-6 text-yellow-500" />, title: "관리적 보호 조치", content: "개인정보를 취급하는 직원을 최소한으로 제한하고, 정기적인 교육을 실시하고 있습니다. 또한 개인정보처리시스템의 접속 기록 보관 및 위조, 변조 방지를 위한 조치를 취하고 있습니다." },
+                  { icon: <Lock className="w-6 h-6 text-blue-500" />, title: "제3자 제공 및 위탁", content: "원칙적으로 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만, 이용자의 동의가 있거나 법령에 근거가 있는 경우에 한하여 제3자에게 제공할 수 있습니다." }
+                ].map((item, index) => (
+                  <motion.div key={index} variants={item} className="bg-white p-6 rounded-lg shadow border border-gray-100">
+                    <div className="flex items-start">
+                      <div className="mr-4 p-3 rounded-full bg-gray-100">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                        <p className="text-gray-600">{item.content}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </TabsContent>
+          </Tabs>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="text-center mt-12 p-8 bg-gray-50 rounded-lg"
+          >
+            <h3 className="text-xl font-bold mb-4">개인정보 관련 문의</h3>
+            <p className="text-gray-600 mb-4">
+              개인정보 처리방침에 대한 문의나 개인정보 관련 고충 처리는 아래 연락처로 문의해 주시기 바랍니다.
+            </p>
+            <div className="inline-flex items-center justify-center">
+              <Button className="bg-primary hover:bg-primary/90">
+                <a href="mailto:privacy@makerstoolkit.com">privacy@makerstoolkit.com</a>
+              </Button>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </main>
+      
       <Footer />
     </div>
   );
