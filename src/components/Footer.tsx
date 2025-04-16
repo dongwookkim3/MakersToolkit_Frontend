@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HelpCircle, Book, Mail, Phone, MapPin } from 'lucide-react';
+import { HelpCircle, Book, Mail, Phone, MapPin, FileText, Shield } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -31,14 +31,6 @@ const Footer = () => {
               </div>
               
               <div>
-                <h3 className="font-medium text-gray-900 mb-4">회사 소개</h3>
-                <ul className="space-y-2">
-                  <li><Link to="/about" className="text-gray-600 hover:text-primary transition-colors">회사 소개</Link></li>
-                  <li><Link to="/about#mission" className="text-gray-600 hover:text-primary transition-colors">미션 & 비전</Link></li>
-                </ul>
-              </div>
-              
-              <div>
                 <h3 className="font-medium text-gray-900 mb-4">고객 서비스</h3>
                 <ul className="space-y-2">
                   <li>
@@ -54,9 +46,35 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/faq" className="text-gray-600 hover:text-primary transition-colors flex items-center">
+                      <FileText className="w-4 h-4 mr-2" />
+                      자주 묻는 질문
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/contact" className="text-gray-600 hover:text-primary transition-colors flex items-center">
                       <Mail className="w-4 h-4 mr-2" />
                       문의하기
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="font-medium text-gray-900 mb-4">회사 정보</h3>
+                <ul className="space-y-2">
+                  <li><Link to="/about" className="text-gray-600 hover:text-primary transition-colors">회사 소개</Link></li>
+                  <li><Link to="/about#mission" className="text-gray-600 hover:text-primary transition-colors">미션 & 비전</Link></li>
+                  <li>
+                    <Link to="/terms" className="text-gray-600 hover:text-primary transition-colors flex items-center">
+                      <FileText className="w-4 h-4 mr-2" />
+                      이용약관
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/privacy" className="text-gray-600 hover:text-primary transition-colors flex items-center">
+                      <Shield className="w-4 h-4 mr-2" />
+                      개인정보처리방침
                     </Link>
                   </li>
                 </ul>
@@ -86,12 +104,12 @@ const Footer = () => {
               © {new Date().getFullYear()} Maker's Toolkit. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+              <Link to="/terms" className="text-gray-600 hover:text-primary transition-colors">
                 이용약관
-              </a>
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+              </Link>
+              <Link to="/privacy" className="text-gray-600 hover:text-primary transition-colors">
                 개인정보처리방침
-              </a>
+              </Link>
             </div>
           </div>
         </div>
