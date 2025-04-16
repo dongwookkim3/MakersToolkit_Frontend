@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Cpu, Wifi, Bot, ChevronDown, ChevronUp, Server, Layers } from 'lucide-react';
+import { Cpu, Wifi, Bot, ChevronDown, ChevronUp, Server, Layers, Codesandbox } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -153,7 +153,7 @@ const ProductsPage = () => {
         "클라우드 연동 가이드",
         "AI 응용 프로젝트 예제"
       ],
-      icon: <Brain className="w-8 h-8" />
+      icon: <Codesandbox className="w-8 h-8" />
     },
     {
       id: 8,
