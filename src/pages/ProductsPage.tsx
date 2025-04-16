@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Cpu, Wifi, Bot, ChevronDown, ChevronUp, Raspberry, Brain, Chip, Layers, Server } from 'lucide-react';
+import { Cpu, Wifi, Bot, ChevronDown, ChevronUp, Server, Layers } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -103,7 +102,7 @@ const ProductsPage = () => {
         "다양한 통신 모듈",
         "고급 펌웨어 개발 가이드"
       ],
-      icon: <Chip className="w-8 h-8" />
+      icon: <Cpu className="w-8 h-8" />
     },
     {
       id: 5,
