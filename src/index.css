@@ -5,44 +5,35 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 215 25% 97%;
+    --foreground: 217 33% 17%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 17%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
 
-    --primary: 260 60% 55%;
+    --primary: 220 70% 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 213 27% 84%;
+    --secondary-foreground: 217 33% 17%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 180 47% 45%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 70% 90%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -52,38 +43,15 @@
   }
 
   body {
-    @apply bg-cosmic-deep-blue text-foreground;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  .star {
-    @apply absolute rounded-full bg-white;
-    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
-  }
-
-  .star-small {
-    width: 1px;
-    height: 1px;
-  }
-
-  .star-medium {
-    width: 2px;
-    height: 2px;
-  }
-
-  .star-large {
-    width: 3px;
-    height: 3px;
-  }
-
-  .planet {
-    @apply rounded-full absolute;
-    box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.6);
-  }
-
-  .planet-orbit {
-    @apply rounded-full absolute border border-gray-700;
-    transform-style: preserve-3d;
+    @apply bg-background text-foreground;
   }
 }
+
+.maker-gradient {
+  @apply bg-gradient-to-r from-primary via-blue-400 to-primary;
+}
+
+.product-card {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-all;
+}
+

@@ -4,67 +4,61 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/10 bg-cosmic-cosmic-black/50 backdrop-blur-md">
+    <footer className="border-t bg-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cosmic-stardust-teal to-cosmic-galaxy-violet"></div>
-              <span className="text-xl font-bold tracking-wider">AstroSpark</span>
+              <div className="w-8 h-8 rounded-full bg-primary"></div>
+              <span className="text-xl font-bold tracking-wider">Maker's Toolkit</span>
             </Link>
-            <p className="text-gray-400 text-sm">
-              Exploring the cosmos, one discovery at a time. Join us on our interstellar journey.
+            <p className="text-gray-600 text-sm">
+              미래의 메이커를 위한 완벽한 교육 솔루션을 제공합니다.
             </p>
           </div>
           
           <div className="md:col-span-3">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               <div>
-                <h3 className="font-medium text-white mb-4">Explore</h3>
+                <h3 className="font-medium text-gray-900 mb-4">제품</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/planets" className="text-gray-400 hover:text-white transition-colors">Planets</Link></li>
-                  <li><Link to="/galaxies" className="text-gray-400 hover:text-white transition-colors">Galaxies</Link></li>
-                  <li><Link to="/stars" className="text-gray-400 hover:text-white transition-colors">Stars</Link></li>
-                  <li><Link to="/phenomena" className="text-gray-400 hover:text-white transition-colors">Phenomena</Link></li>
+                  <li><Link to="/products?level=초급" className="text-gray-600 hover:text-primary transition-colors">초급 키트</Link></li>
+                  <li><Link to="/products?level=중급" className="text-gray-600 hover:text-primary transition-colors">중급 키트</Link></li>
+                  <li><Link to="/products?level=고급" className="text-gray-600 hover:text-primary transition-colors">고급 키트</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-medium text-white mb-4">About</h3>
+                <h3 className="font-medium text-gray-900 mb-4">회사</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">Our Mission</Link></li>
-                  <li><Link to="/team" className="text-gray-400 hover:text-white transition-colors">Team</Link></li>
-                  <li><Link to="/partners" className="text-gray-400 hover:text-white transition-colors">Partners</Link></li>
-                  <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+                  <li><Link to="/about" className="text-gray-600 hover:text-primary transition-colors">회사 소개</Link></li>
+                  <li><Link to="/team" className="text-gray-600 hover:text-primary transition-colors">팀</Link></li>
+                  <li><Link to="/contact" className="text-gray-600 hover:text-primary transition-colors">문의하기</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-medium text-white mb-4">Resources</h3>
+                <h3 className="font-medium text-gray-900 mb-4">리소스</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/research" className="text-gray-400 hover:text-white transition-colors">Research</Link></li>
-                  <li><Link to="/education" className="text-gray-400 hover:text-white transition-colors">Education</Link></li>
-                  <li><Link to="/events" className="text-gray-400 hover:text-white transition-colors">Events</Link></li>
-                  <li><Link to="/media" className="text-gray-400 hover:text-white transition-colors">Media</Link></li>
+                  <li><Link to="/blog" className="text-gray-600 hover:text-primary transition-colors">블로그</Link></li>
+                  <li><Link to="/guides" className="text-gray-600 hover:text-primary transition-colors">가이드</Link></li>
+                  <li><Link to="/support" className="text-gray-600 hover:text-primary transition-colors">고객 지원</Link></li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} AstroSpark. All rights reserved.
+        <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-600 text-sm">
+            © {new Date().getFullYear()} Maker's Toolkit. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Terms
+            <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+              이용약관
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Privacy
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Cookies
+            <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+              개인정보처리방침
             </a>
           </div>
         </div>

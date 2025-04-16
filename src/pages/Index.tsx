@@ -1,6 +1,5 @@
 
 import React from 'react';
-import StarField from '@/components/StarField';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ProductsPreview from '@/components/ProductsPreview';
@@ -9,8 +8,7 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      <StarField />
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar />
       
       <main>

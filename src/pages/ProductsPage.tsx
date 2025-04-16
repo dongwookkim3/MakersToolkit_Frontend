@@ -1,11 +1,10 @@
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StarField from '@/components/StarField';
 import { Button } from '@/components/ui/button';
-import { Cpu, Wifi, Bot, ChevronDown, ChevronUp, Filter } from 'lucide-react';
+import { Cpu, Wifi, Bot, ChevronDown, ChevronUp } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,6 +17,16 @@ import {
 const ProductsPage = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const location = useLocation();
+
+  // URL에서 필터 파라미터를 가져옵니다
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const levelParam = params.get('level');
+    if (levelParam) {
+      setActiveFilter(levelParam);
+    }
+  }, [location]);
 
   const toggleExpand = (id: number) => {
     if (expandedId === id) {
@@ -86,8 +95,7 @@ const ProductsPage = () => {
     : products;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      <StarField />
+    <div className="min-h-screen">
       <Navbar />
       
       <main className="pt-24 pb-16 container mx-auto px-4">
@@ -103,37 +111,37 @@ const ProductsPage = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">교육용 임베디드 키트</h1>
-        <p className="text-lg text-gray-300 max-w-3xl mx-auto text-center mb-10">
-          다양한 수준과 목적에 맞춘 임베디드 교육 키트를 제공합니다. 모든 키트는 상세한 학습 가이드와 실습 자료를 포함하고 있습니다.
+        <h1 className="text-4xl font-bold mb-8 text-center">교육용 임베디드 키트</h1>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-10">
+          다양한 수준과 목적에 맞춘 임베디드 교육 키트를 제공합니다.
         </p>
         
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-full flex p-1">
+          <div className="bg-white shadow-sm rounded-full flex p-1">
             <Button 
               variant={activeFilter === null ? "default" : "ghost"}
-              className={`rounded-full ${activeFilter === null ? "bg-cosmic-stardust-teal" : ""}`}
+              className={`rounded-full ${activeFilter === null ? "bg-primary" : ""}`}
               onClick={() => setActiveFilter(null)}
             >
               전체
             </Button>
             <Button 
               variant={activeFilter === "초급" ? "default" : "ghost"}
-              className={`rounded-full ${activeFilter === "초급" ? "bg-cosmic-stardust-teal" : ""}`}
+              className={`rounded-full ${activeFilter === "초급" ? "bg-primary" : ""}`}
               onClick={() => setActiveFilter("초급")}
             >
               초급
             </Button>
             <Button 
               variant={activeFilter === "중급" ? "default" : "ghost"}
-              className={`rounded-full ${activeFilter === "중급" ? "bg-cosmic-stardust-teal" : ""}`}
+              className={`rounded-full ${activeFilter === "중급" ? "bg-primary" : ""}`}
               onClick={() => setActiveFilter("중급")}
             >
               중급
             </Button>
             <Button 
               variant={activeFilter === "고급" ? "default" : "ghost"}
-              className={`rounded-full ${activeFilter === "고급" ? "bg-cosmic-stardust-teal" : ""}`}
+              className={`rounded-full ${activeFilter === "고급" ? "bg-primary" : ""}`}
               onClick={() => setActiveFilter("고급")}
             >
               고급
@@ -141,22 +149,22 @@ const ProductsPage = () => {
           </div>
         </div>
         
-        <div className="space-y-8">
+        <div className="space-y-6">
           {filteredProducts.map((product) => (
             <div 
               key={product.id} 
               id={`product-${product.id}`}
-              className="border border-white/10 rounded-lg bg-black/40 backdrop-blur-sm overflow-hidden transition-transform hover:translate-y-[-4px]"
+              className="border rounded-lg bg-white shadow-sm overflow-hidden transition-transform hover:shadow-md"
             >
               <div className="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="p-2 bg-white/5 rounded-lg">
+                  <div className="p-2 bg-primary/10 rounded-lg">
                     {product.icon}
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold">{product.name}</h2>
                     <div className="flex items-center gap-4">
-                      <span className="text-sm text-cosmic-stardust-teal">{product.category}</span>
+                      <span className="text-sm text-primary">{product.category}</span>
                       <span className="text-lg font-semibold">{product.price}</span>
                     </div>
                   </div>
@@ -179,13 +187,13 @@ const ProductsPage = () => {
               </div>
               
               {expandedId === product.id && (
-                <div className="p-6 pt-0 border-t border-white/10">
-                  <p className="text-gray-300 mb-4">{product.description}</p>
+                <div className="p-6 pt-0 border-t">
+                  <p className="text-gray-600 mb-4">{product.description}</p>
                   <h3 className="font-semibold mb-2">포함 구성품:</h3>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {product.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-cosmic-stardust-teal" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                         {feature}
                       </li>
                     ))}
