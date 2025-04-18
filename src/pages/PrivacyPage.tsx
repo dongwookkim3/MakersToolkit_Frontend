@@ -26,6 +26,7 @@ const PrivacyPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Animation variants
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -124,17 +125,17 @@ const PrivacyPage = () => {
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
               >
                 {[
-                  { icon: <FileText className="w-6 h-6 text-primary" />, title: "방침 시행일", content: "이 개인정보처리방침은 2025년 4월 16일부터 시행됩니다." },
-                  { icon: <Eye className="w-6 h-6 text-primary" />, title: "방침 변경 고지", content: "개인정보처리방침이 변경되는 경우 변경 사항을 웹사이트에 공지합니다." }
-                ].map((item, index) => (
+                  { iconElement: <FileText className="w-6 h-6 text-primary" />, title: "방침 시행일", content: "이 개인정보처리방침은 2025년 4월 16일부터 시행됩니다." },
+                  { iconElement: <Eye className="w-6 h-6 text-primary" />, title: "방침 변경 고지", content: "개인정보처리방침이 변경되는 경우 변경 사항을 웹사이트에 공지합니다." }
+                ].map((infoItem, index) => (
                   <motion.div key={index} variants={item} className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow border border-gray-100">
                     <div className="flex items-start">
                       <div className="mr-4 bg-primary/10 p-3 rounded-full">
-                        {item.icon}
+                        {infoItem.iconElement}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                        <p className="text-gray-600">{item.content}</p>
+                        <h3 className="text-lg font-semibold mb-2">{infoItem.title}</h3>
+                        <p className="text-gray-600">{infoItem.content}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -172,18 +173,18 @@ const PrivacyPage = () => {
                 className="grid grid-cols-1 gap-6"
               >
                 {[
-                  { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "기술적 보호 조치", content: "개인정보를 안전하게 처리하기 위한 내부 관리계획 수립, 접근 통제 시스템 설치, 고유식별정보 등의 암호화, 보안 프로그램 설치 등의 기술적 조치를 하고 있습니다." },
-                  { icon: <AlertCircle className="w-6 h-6 text-yellow-500" />, title: "관리적 보호 조치", content: "개인정보를 취급하는 직원을 최소한으로 제한하고, 정기적인 교육을 실시하고 있습니다. 또한 개인정보처리시스템의 접속 기록 보관 및 위조, 변조 방지를 위한 조치를 취하고 있습니다." },
-                  { icon: <Lock className="w-6 h-6 text-blue-500" />, title: "제3자 제공 및 위탁", content: "원칙적으로 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만, 이용자의 동의가 있거나 법령에 근거가 있는 경우에 한하여 제3자에게 제공할 수 있습니다." }
-                ].map((item, index) => (
+                  { iconElement: <CheckCircle className="w-6 h-6 text-green-500" />, title: "기술적 보호 조치", content: "개인정보를 안전하게 처리하기 위한 내부 관리계획 수립, 접근 통제 시스템 설치, 고유식별정보 등의 암호화, 보안 프로그램 설치 등의 기술적 조치를 하고 있습니다." },
+                  { iconElement: <AlertCircle className="w-6 h-6 text-yellow-500" />, title: "관리적 보호 조치", content: "개인정보를 취급하는 직원을 최소한으로 제한하고, 정기적인 교육을 실시하고 있습니다. 또한 개인정보처리시스템의 접속 기록 보관 및 위조, 변조 방지를 위한 조치를 취하고 있습니다." },
+                  { iconElement: <Lock className="w-6 h-6 text-blue-500" />, title: "제3자 제공 및 위탁", content: "원칙적으로 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만, 이용자의 동의가 있거나 법령에 근거가 있는 경우에 한하여 제3자에게 제공할 수 있습니다." }
+                ].map((protectionItem, index) => (
                   <motion.div key={index} variants={item} className="bg-white p-6 rounded-lg shadow border border-gray-100">
                     <div className="flex items-start">
                       <div className="mr-4 p-3 rounded-full bg-gray-100">
-                        {item.icon}
+                        {protectionItem.iconElement}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                        <p className="text-gray-600">{item.content}</p>
+                        <h3 className="text-lg font-semibold mb-2">{protectionItem.title}</h3>
+                        <p className="text-gray-600">{protectionItem.content}</p>
                       </div>
                     </div>
                   </motion.div>
