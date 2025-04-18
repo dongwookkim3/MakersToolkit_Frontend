@@ -5,34 +5,37 @@
 
 @layer base {
   :root {
-    --background: 215 25% 97%;
-    --foreground: 217 33% 17%;
+    --background: 225 20% 98%;
+    --foreground: 222 47% 11%;
+    
+    --cosmic-primary: 271 50% 50%;     // 보라색 주요 색상
+    --cosmic-secondary: 248 70% 80%;   // 라벤더 보조 색상
+    --cosmic-accent: 175 50% 47%;      // 청록색 강조 색상
 
     --card: 0 0% 100%;
-    --card-foreground: 217 33% 17%;
-
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 217 33% 17%;
-
-    --primary: 220 70% 50%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: var(--cosmic-primary);
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 213 27% 84%;
-    --secondary-foreground: 217 33% 17%;
-
-    --muted: 214 32% 91%;
+    
+    --secondary: var(--cosmic-secondary);
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 210 40% 96%;
     --muted-foreground: 215 20% 65%;
-
-    --accent: 220 70% 90%;
+    
+    --accent: 248 70% 90%;
     --accent-foreground: 222 47% 11%;
-
+    
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
-
+    
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 222 47% 11%;
-
+    
     --radius: 0.5rem;
   }
 }
@@ -41,17 +44,20 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
   }
 }
 
+// 추가 유틸리티 클래스들
 .maker-gradient {
-  @apply bg-gradient-to-r from-primary via-blue-400 to-primary;
+  @apply bg-gradient-to-r from-primary via-secondary to-primary;
+}
+
+.glass-card {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-cosmic-lg;
 }
 
 .product-card {
-  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-all;
+  @apply bg-white rounded-lg shadow-md hover:shadow-cosmic-lg transition-all;
 }
-

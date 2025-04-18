@@ -1,38 +1,45 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
-	darkMode: ["class"],
-	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
-	],
-	prefix: "",
-	theme: {
-		container: {
-			center: true,
-			padding: '2rem',
-			screens: {
-				'2xl': '1400px'
-			}
-		},
-		extend: {
-			colors: {
-				border: 'hsl(var(--border))',
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+  prefix: "",
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+      colors: {
+        // 새로운 프라이머리 컬러 팔레트 추가
+        cosmic: {
+          'primary': '#6B46C1',       // 깊은 보라
+          'secondary': '#9B87F5',     // 부드러운 라벤더
+          'accent': '#38B2AC',        // 청록색
+          'background': '#F7FAFC',    // 밝은 회색 배경
+          'text': '#1A202C',          // 어두운 회색 텍스트
+        },
+        border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
-				},
-				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
-				},
+        primary: {
+          DEFAULT: "hsl(var(--cosmic-primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--cosmic-secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
@@ -63,7 +70,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				cosmic: {
+				cosmic2: {
 					'deep-blue': '#0a0f29',
 					'nebula-purple': '#483d8b',
 					'galaxy-violet': '#6b46c1',
@@ -71,8 +78,16 @@ export default {
 					'nova-orange': '#ed8936',
 					'cosmic-black': '#000814'
 				}
-			},
-			borderRadius: {
+      },
+      // 추가 테마 확장
+      backgroundImage: {
+        'gradient-cosmic': 'linear-gradient(135deg, #6B46C1 0%, #9B87F5 100%)',
+      },
+      boxShadow: {
+        'cosmic-lg': '0 10px 15px -3px rgba(107, 70, 193, 0.2), 0 4px 6px -2px rgba(107, 70, 193, 0.1)',
+      },
+      // 다른 키프레임과 애니메이션 유지
+      borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
@@ -116,7 +131,7 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'orbit': 'orbit 20s linear infinite'
 			}
-		}
-	},
-	plugins: [require("tailwindcss-animate")],
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config;
