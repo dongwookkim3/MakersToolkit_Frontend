@@ -8,9 +8,9 @@
     --background: 225 20% 98%;
     --foreground: 222 47% 11%;
     
-    --cosmic-primary: 271 50% 50%;     // 보라색 주요 색상
-    --cosmic-secondary: 248 70% 80%;   // 라벤더 보조 색상
-    --cosmic-accent: 175 50% 47%;      // 청록색 강조 색상
+    --cosmic-primary: 271 50% 50%;     /* 보라색 주요 색상 */
+    --cosmic-secondary: 248 70% 80%;   /* 라벤더 보조 색상 */
+    --cosmic-accent: 175 50% 47%;      /* 청록색 강조 색상 */
 
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
@@ -49,7 +49,7 @@
   }
 }
 
-// 추가 유틸리티 클래스들
+/* 추가 유틸리티 클래스들 */
 .maker-gradient {
   @apply bg-gradient-to-r from-primary via-secondary to-primary;
 }

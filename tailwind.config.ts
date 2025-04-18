@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,11 +22,11 @@ export default {
       colors: {
         // 새로운 프라이머리 컬러 팔레트 추가
         cosmic: {
-          'primary': '#6B46C1',       // 깊은 보라
-          'secondary': '#9B87F5',     // 부드러운 라벤더
-          'accent': '#38B2AC',        // 청록색
-          'background': '#F7FAFC',    // 밝은 회색 배경
-          'text': '#1A202C',          // 어두운 회색 텍스트
+          'primary': '#6B46C1',       /* 깊은 보라 */
+          'secondary': '#9B87F5',     /* 부드러운 라벤더 */
+          'accent': '#38B2AC',        /* 청록색 */
+          'background': '#F7FAFC',    /* 밝은 회색 배경 */
+          'text': '#1A202C',          /* 어두운 회색 텍스트 */
         },
         border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
