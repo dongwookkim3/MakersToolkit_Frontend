@@ -4,10 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
+  const { user, signOut, isAdmin } = useAuth();
 
   const navItems = [
     { name: '홈', path: '/' },
@@ -38,9 +40,20 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <Button asChild className="bg-primary hover:bg-primary/90 transition-opacity">
-            <Link to="/contact">제품 문의</Link>
-          </Button>
+          {user ? (
+            <div className="flex items-center gap-4">
+              {isAdmin && (
+                <span className="text-sm text-primary font-medium">관리자</span>
+              )}
+              <Button onClick={signOut} variant="outline">
+                로그아웃
+              </Button>
+            </div>
+          ) : (
+            <Button asChild>
+              <Link to="/auth">로그인</Link>
+            </Button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -73,9 +86,20 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <Button asChild className="bg-primary hover:bg-primary/90 transition-opacity w-full">
-            <Link to="/contact" onClick={() => setIsMenuOpen(false)}>제품 문의</Link>
-          </Button>
+          {user ? (
+            <div className="flex flex-col gap-2">
+              {isAdmin && (
+                <span className="text-sm text-primary font-medium">관리자</span>
+              )}
+              <Button onClick={signOut} variant="outline" className="w-full">
+                로그아웃
+              </Button>
+            </div>
+          ) : (
+            <Button asChild className="w-full">
+              <Link to="/auth" onClick={() => setIsMenuOpen(false)}>로그인</Link>
+            </Button>
+          )}
         </div>
       </div>
     </nav>
