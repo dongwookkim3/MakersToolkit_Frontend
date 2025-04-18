@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,13 +19,12 @@ export default {
     },
     extend: {
       colors: {
-        // 새로운 프라이머리 컬러 팔레트 추가
         cosmic: {
-          'primary': '#6B46C1',       /* 깊은 보라 */
-          'secondary': '#9B87F5',     /* 부드러운 라벤더 */
-          'accent': '#38B2AC',        /* 청록색 */
-          'background': '#F7FAFC',    /* 밝은 회색 배경 */
-          'text': '#1A202C',          /* 어두운 회색 텍스트 */
+          'primary': '#3B82F6',       /* 밝은 파란색 */
+          'secondary': '#0EA5E9',     /* 하늘색 */
+          'accent': '#06B6D4',        /* 청록색 */
+          'background': '#0F172A',    /* 어두운 네이비 배경 */
+          'text': '#F8FAFC',          /* 밝은 텍스트 */
         },
         border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -80,14 +78,12 @@ export default {
 					'cosmic-black': '#000814'
 				}
       },
-      // 추가 테마 확장
       backgroundImage: {
         'gradient-cosmic': 'linear-gradient(135deg, #6B46C1 0%, #9B87F5 100%)',
       },
       boxShadow: {
         'cosmic-lg': '0 10px 15px -3px rgba(107, 70, 193, 0.2), 0 4px 6px -2px rgba(107, 70, 193, 0.1)',
       },
-      // 다른 키프레임과 애니메이션 유지
       borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

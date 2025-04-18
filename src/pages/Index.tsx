@@ -5,13 +5,15 @@ import HeroSection from '@/components/HeroSection';
 import ProductsPreview from '@/components/ProductsPreview';
 import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
+import DynamicBackground from '@/components/DynamicBackground';
 
 const Index = () => {
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden relative">
+      <DynamicBackground />
       <Navbar />
       
-      <main>
+      <main className="relative">
         <HeroSection />
         <ProductsPreview />
         <FeaturesSection />

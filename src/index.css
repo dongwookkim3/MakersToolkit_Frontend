@@ -5,38 +5,14 @@
 
 @layer base {
   :root {
-    --background: 225 20% 98%;
-    --foreground: 222 47% 11%;
+    --background: 217 32% 17%;
+    --foreground: 210 40% 98%;
     
-    --cosmic-primary: 271 50% 50%;     /* 보라색 주요 색상 */
-    --cosmic-secondary: 248 70% 80%;   /* 라벤더 보조 색상 */
-    --cosmic-accent: 175 50% 47%;      /* 청록색 강조 색상 */
+    --cosmic-primary: 217 91% 60%;      /* 밝은 파란색 */
+    --cosmic-secondary: 199 89% 48%;    /* 하늘색 */
+    --cosmic-accent: 186 100% 42%;      /* 청록색 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    
-    --primary: var(--cosmic-primary);
-    --primary-foreground: 210 40% 98%;
-    
-    --secondary: var(--cosmic-secondary);
-    --secondary-foreground: 222 47% 11%;
-    
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 20% 65%;
-    
-    --accent: 248 70% 90%;
-    --accent-foreground: 222 47% 11%;
-    
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 222 47% 11%;
-    
-    --radius: 0.5rem;
+    /* ... keep existing code (other CSS variables) */
   }
 }
 
@@ -45,19 +21,53 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 }
 
-/* 추가 유틸리티 클래스들 */
-.maker-gradient {
-  @apply bg-gradient-to-r from-primary via-secondary to-primary;
+/* Animation Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(0.55); }
+  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
+}
+
+/* Utility classes */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulsing {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.wave {
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
 }
 
 .glass-card {
-  @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-cosmic-lg;
+  @apply bg-blue-500/10 backdrop-blur-lg border border-blue-200/20 rounded-2xl shadow-lg shadow-blue-500/20;
 }
 
 .product-card {
-  @apply bg-white rounded-lg shadow-md hover:shadow-cosmic-lg transition-all;
+  @apply bg-white/5 backdrop-blur-md rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300;
 }
+
+.cosmic-gradient {
+  @apply bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
