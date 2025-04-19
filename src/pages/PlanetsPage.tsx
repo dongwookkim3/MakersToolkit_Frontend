@@ -6,7 +6,21 @@ import StarField from '@/components/StarField';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const planets = [
+interface PlanetStats {
+  diameter: string;
+  orbit: string;
+  gravity: string;
+}
+
+interface Planet {
+  id: string;
+  name: string;
+  description: string;
+  category: 'inner' | 'outer';
+  stats: PlanetStats;
+}
+
+const planets: Planet[] = [
   {
     id: 'mercury',
     name: '수성',
@@ -119,18 +133,30 @@ const PlanetsPage = () => {
   );
 };
 
-const PlanetCard = ({ planet }) => {
+interface PlanetCardProps {
+  planet: Planet;
+}
+
+const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
+  // Helper function to determine the right color class
+  const getPlanetColorClass = (planetId: string): string => {
+    switch (planetId) {
+      case 'mercury': return 'from-gray-400 to-gray-500';
+      case 'venus': return 'from-yellow-400 to-yellow-600';
+      case 'earth': return 'from-blue-500 to-blue-400';
+      case 'mars': return 'from-red-600 to-red-400';
+      case 'jupiter': return 'from-amber-500 to-amber-400';
+      case 'saturn': return 'from-yellow-500 to-yellow-300';
+      case 'uranus': return 'from-cyan-500 to-cyan-300';
+      case 'neptune': return 'from-blue-600 to-blue-400';
+      default: return 'from-indigo-500 to-indigo-400';
+    }
+  };
+  
   return (
     <Card className="overflow-hidden backdrop-blur-md bg-blue-900/30 border-blue-500/20">
       <div className="h-48 bg-gradient-to-br from-blue-700 to-purple-900 flex items-center justify-center">
-        <div className={`w-32 h-32 rounded-full bg-gradient-to-br from-blue-${planet.id === 'earth' ? '500' : '600'} to-${
-          planet.id === 'mars' ? 'red' : 
-          planet.id === 'venus' ? 'yellow' : 
-          planet.id === 'jupiter' ? 'amber' : 
-          planet.id === 'saturn' ? 'yellow' : 
-          planet.id === 'uranus' ? 'cyan' : 
-          planet.id === 'neptune' ? 'blue' : 'indigo'
-        }-${planet.id === 'earth' ? '400' : '500'} animate-pulse`}>
+        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${getPlanetColorClass(planet.id)} animate-pulse`}>
         </div>
       </div>
       <CardContent className="p-6">
