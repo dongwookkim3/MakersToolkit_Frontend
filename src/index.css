@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -93,6 +94,27 @@
   }
 }
 
+/* 텍스트 색상 클래스 추가 */
+.text-cosmic {
+  @apply text-blue-900 dark:text-blue-100;
+}
+
+.text-cosmic-light {
+  @apply text-blue-100 dark:text-blue-100;
+}
+
+.text-cosmic-dark {
+  @apply text-blue-900 dark:text-blue-300;
+}
+
+.bg-cosmic-dark {
+  @apply bg-blue-900 dark:bg-blue-950;
+}
+
+.bg-cosmic-light {
+  @apply bg-white dark:bg-blue-900;
+}
+
 /* Improved Animation Keyframes */
 @keyframes smooth-float {
   0% { transform: translateY(0); }
@@ -155,11 +177,11 @@
 }
 
 .glass-card {
-  @apply bg-blue-500/10 backdrop-blur-lg border border-blue-200/20 rounded-2xl shadow-lg shadow-blue-500/20;
+  @apply bg-white/90 backdrop-blur-lg border border-blue-200 rounded-2xl shadow-lg dark:bg-blue-900/70 dark:border-blue-700/40;
 }
 
 .product-card {
-  @apply bg-white/5 backdrop-blur-md rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300;
+  @apply bg-white/90 backdrop-blur-md rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 dark:bg-blue-900/50;
 }
 
 .cosmic-gradient {
