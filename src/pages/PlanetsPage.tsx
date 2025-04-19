@@ -11,8 +11,8 @@ const PlanetsPage = () => {
       <Navbar />
       
       <main className="pt-24 pb-16 container mx-auto px-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-white">Explore Planets</h1>
-        <div className="text-center text-xl text-white/90 mb-16">
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center text-blue-100">Explore Planets</h1>
+        <div className="text-center text-xl text-blue-100 mb-16">
           This page is under construction. Soon you'll be able to explore detailed information about various planets.
         </div>
       </main>
