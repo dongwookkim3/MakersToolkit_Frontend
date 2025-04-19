@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,24 +95,55 @@
   }
 }
 
-/* Animation Keyframes */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
+/* Improved Animation Keyframes */
+@keyframes smooth-float {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-10px); }
   50% { transform: translateY(-20px); }
+  75% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
+@keyframes smooth-pulse {
+  0% { opacity: 1; }
+  25% { opacity: 0.7; }
   50% { opacity: 0.5; }
+  75% { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
-@keyframes wave {
+@keyframes smooth-wave {
   0% { transform: translateX(0) translateZ(0) scaleY(1); }
-  50% { transform: translateX(-25%) translateZ(0) scaleY(0.55); }
+  25% { transform: translateX(-12.5%) translateZ(0) scaleY(0.8); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(0.6); }
+  75% { transform: translateX(-37.5%) translateZ(0) scaleY(0.8); }
   100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
 }
 
-/* Utility classes */
+@keyframes twinkle-smooth {
+  0% { opacity: var(--initial-opacity, 0.7); }
+  50% { opacity: var(--final-opacity, 0.2); }
+  100% { opacity: var(--initial-opacity, 0.7); }
+}
+
+/* Smooth utility classes */
+.smooth-floating {
+  animation: smooth-float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.smooth-pulsing {
+  animation: smooth-pulse 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.smooth-wave {
+  animation: smooth-wave 12s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.animate-twinkle-smooth {
+  animation: twinkle-smooth 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* Original utility classes */
 .floating {
   animation: float 6s ease-in-out infinite;
 }
@@ -138,4 +170,21 @@
 
 .text-glow {
   text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Legacy keyframes (kept for backward compatibility) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(0.55); }
+  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
 }
