@@ -5,83 +5,38 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;   /* Much darker for better contrast */
+    --background: 217 32% 17%;
+    --foreground: 210 40% 98%;
     
     --cosmic-primary: 217 91% 60%;
     --cosmic-secondary: 199 89% 48%;
     --cosmic-accent: 186 100% 42%;
     
-    --primary: 222.2 47.4% 11.2%;    /* Darker primary color */
+    --card: 217 32% 17%;
+    --card-foreground: 210 40% 98%;
+    --popover: 217 32% 17%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
     
-    --border: 214.3 31.8% 91.8%;
-    --input: 214.3 31.8% 91.8%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --sidebar-background: 240 5.9% 98%;
-    --sidebar-foreground: 240 10% 3.9%;
-    --sidebar-primary: 220 72.2% 47.1%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 220 53% 91%;
-    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-    --sidebar-border: 214.3 31.8% 91.8%;
-    --sidebar-ring: 222.2 84% 4.9%;
-  }
-
-  .dark {
-    --background: 217 32% 17%;
-    --foreground: 210 40% 98%;      /* Brighter text in dark mode */
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+    
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
     
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 215.4 16.3% 56.9%;
-
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 40% 98%;
-
-    --popover: 217 32% 17%;
-    --popover-foreground: 210 40% 98%;
-
-    --card: 217 32% 17%;
-    --card-foreground: 210 40% 98%;
-
-    --sidebar-background: 217 32% 17%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 220 72.2% 47.1%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 220 53% 91%;
-    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-    --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 212.7 26.8% 83.9%;
+    
+    --radius: 0.75rem;
   }
 }
 
@@ -90,121 +45,89 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased; /* Added antialiased for smoother text */
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 }
 
-/* 텍스트 색상 클래스 추가 */
+/* 우주 테마 관련 유틸리티 클래스 */
 .text-cosmic {
-  @apply text-blue-900 dark:text-blue-100;
+  @apply text-blue-100;
 }
 
 .text-cosmic-light {
-  @apply text-blue-100 dark:text-blue-100;
+  @apply text-blue-100;
 }
 
 .text-cosmic-dark {
-  @apply text-blue-900 dark:text-blue-300;
+  @apply text-blue-900;
 }
 
 .bg-cosmic-dark {
-  @apply bg-blue-900 dark:bg-blue-950;
+  @apply bg-blue-900/90;
 }
 
 .bg-cosmic-light {
-  @apply bg-white dark:bg-blue-900;
+  @apply bg-white/10;
 }
 
-/* Improved Animation Keyframes */
-@keyframes smooth-float {
-  0% { transform: translateY(0); }
-  25% { transform: translateY(-10px); }
-  50% { transform: translateY(-20px); }
-  75% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes smooth-pulse {
-  0% { opacity: 1; }
-  25% { opacity: 0.7; }
-  50% { opacity: 0.5; }
-  75% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-@keyframes smooth-wave {
-  0% { transform: translateX(0) translateZ(0) scaleY(1); }
-  25% { transform: translateX(-12.5%) translateZ(0) scaleY(0.8); }
-  50% { transform: translateX(-25%) translateZ(0) scaleY(0.6); }
-  75% { transform: translateX(-37.5%) translateZ(0) scaleY(0.8); }
-  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
-}
-
-@keyframes twinkle-smooth {
-  0% { opacity: var(--initial-opacity, 0.7); }
-  50% { opacity: var(--final-opacity, 0.2); }
-  100% { opacity: var(--initial-opacity, 0.7); }
-}
-
-/* Smooth utility classes */
-.smooth-floating {
-  animation: smooth-float 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-.smooth-pulsing {
-  animation: smooth-pulse 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-.smooth-wave {
-  animation: smooth-wave 12s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-.animate-twinkle-smooth {
-  animation: twinkle-smooth 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-/* Original utility classes */
-.floating {
-  animation: float 6s ease-in-out infinite;
-}
-
-.pulsing {
-  animation: pulse 3s ease-in-out infinite;
-}
-
-.wave {
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-}
-
+/* 글래스모피즘 효과 */
 .glass-card {
-  @apply bg-white/90 backdrop-blur-lg border border-blue-200 rounded-2xl shadow-lg dark:bg-blue-900/70 dark:border-blue-700/40;
+  @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
 }
 
-.product-card {
-  @apply bg-white/90 backdrop-blur-md rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 dark:bg-blue-900/50;
+.neo-blur {
+  @apply backdrop-blur-2xl bg-black/40 border border-white/10;
 }
 
-.cosmic-gradient {
-  @apply bg-gradient-to-r from-blue-600 via-blue-400 to-cyan-400;
-}
-
-.text-glow {
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-}
-
-/* Legacy keyframes (kept for backward compatibility) */
-@keyframes float {
+/* 부드러운 애니메이션 */
+@keyframes smooth-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
 }
 
-@keyframes pulse {
+@keyframes smooth-pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.6; }
 }
 
-@keyframes wave {
-  0% { transform: translateX(0) translateZ(0) scaleY(1); }
-  50% { transform: translateX(-25%) translateZ(0) scaleY(0.55); }
-  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
+@keyframes smooth-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
+
+.floating {
+  animation: smooth-float 6s ease-in-out infinite;
+}
+
+.pulsing {
+  animation: smooth-pulse 3s ease-in-out infinite;
+}
+
+.spinning {
+  animation: smooth-spin 20s linear infinite;
+}
+
+/* 텍스트 그라데이션 효과 */
+.text-gradient {
+  @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+}
+
+.text-gradient-cosmic {
+  @apply bg-gradient-to-br from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent;
+}
+
+/* 반응형 유틸리티 */
+.responsive-container {
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.responsive-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+/* 카드 스타일 */
+.card-cosmic {
+  @apply glass-card hover:bg-white/10 transition-all duration-300;
+}
+

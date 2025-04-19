@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -81,29 +80,30 @@ const planets: Planet[] = [
 
 const PlanetsPage = () => {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-background">
       <StarField />
       <Navbar />
       
-      <main className="pt-24 pb-16 container mx-auto px-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center text-cosmic-light">
+      <main className="pt-24 pb-16 responsive-container">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center text-gradient-cosmic">
           태양계 행성 탐험
         </h1>
-        <p className="text-center text-blue-100 mb-10 max-w-3xl mx-auto">
-          태양계의 8개 행성들을 탐험하고 각 행성의 특징과 정보를 알아보세요. 각 행성은 독특한 특성과 아름다움을 가지고 있습니다.
+        <p className="text-center text-cosmic-light mb-10 max-w-3xl mx-auto text-lg">
+          태양계의 8개 행성들을 탐험하고 각 행성의 특징과 정보를 알아보세요.
+          각 행성은 독특한 특성과 아름다움을 가지고 있습니다.
         </p>
         
         <Tabs defaultValue="all" className="mb-8">
           <div className="flex justify-center mb-8">
-            <TabsList className="bg-blue-900/40 backdrop-blur-md">
-              <TabsTrigger value="all" className="text-blue-100">모든 행성</TabsTrigger>
-              <TabsTrigger value="inner" className="text-blue-100">내행성</TabsTrigger>
-              <TabsTrigger value="outer" className="text-blue-100">외행성</TabsTrigger>
+            <TabsList className="neo-blur">
+              <TabsTrigger value="all" className="text-cosmic-light">모든 행성</TabsTrigger>
+              <TabsTrigger value="inner" className="text-cosmic-light">내행성</TabsTrigger>
+              <TabsTrigger value="outer" className="text-cosmic-light">외행성</TabsTrigger>
             </TabsList>
           </div>
           
           <TabsContent value="all" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="responsive-grid">
               {planets.map((planet) => (
                 <PlanetCard key={planet.id} planet={planet} />
               ))}
@@ -111,7 +111,7 @@ const PlanetsPage = () => {
           </TabsContent>
           
           <TabsContent value="inner" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="responsive-grid">
               {planets.filter(p => p.category === 'inner').map((planet) => (
                 <PlanetCard key={planet.id} planet={planet} />
               ))}
@@ -119,7 +119,7 @@ const PlanetsPage = () => {
           </TabsContent>
           
           <TabsContent value="outer" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="responsive-grid">
               {planets.filter(p => p.category === 'outer').map((planet) => (
                 <PlanetCard key={planet.id} planet={planet} />
               ))}
@@ -138,7 +138,6 @@ interface PlanetCardProps {
 }
 
 const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
-  // Helper function to determine the right color class
   const getPlanetColorClass = (planetId: string): string => {
     switch (planetId) {
       case 'mercury': return 'from-gray-400 to-gray-500';
@@ -154,19 +153,19 @@ const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
   };
   
   return (
-    <Card className="overflow-hidden backdrop-blur-md bg-blue-900/30 border-blue-500/20">
-      <div className="h-48 bg-gradient-to-br from-blue-700 to-purple-900 flex items-center justify-center">
-        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${getPlanetColorClass(planet.id)} animate-pulse`}>
+    <Card className="card-cosmic overflow-hidden">
+      <div className="h-48 bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center">
+        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${getPlanetColorClass(planet.id)} spinning`}>
         </div>
       </div>
       <CardContent className="p-6">
-        <h3 className="text-xl font-bold mb-2 text-blue-100">{planet.name}</h3>
-        <p className="text-blue-200 mb-4 text-sm">{planet.description}</p>
+        <h3 className="text-xl font-bold mb-2 text-gradient">{planet.name}</h3>
+        <p className="text-cosmic-light mb-4 text-sm">{planet.description}</p>
         <div className="grid grid-cols-3 gap-2 text-center">
           {Object.entries(planet.stats).map(([key, value]) => (
-            <div key={key} className="bg-blue-800/30 p-2 rounded">
-              <div className="text-xs text-blue-300 uppercase">{key}</div>
-              <div className="text-sm font-semibold text-blue-100">{value}</div>
+            <div key={key} className="neo-blur p-2 rounded">
+              <div className="text-xs text-cosmic-light/80 uppercase">{key}</div>
+              <div className="text-sm font-semibold text-cosmic-light">{value}</div>
             </div>
           ))}
         </div>
