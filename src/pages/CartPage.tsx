@@ -67,7 +67,8 @@ const CartPage: React.FC = () => {
 
   const handleGoToLogin = () => {
     setIsLoginDialogOpen(false);
-    navigate('/auth');
+    // Pass the current location as state to redirect back after login
+    navigate('/auth', { state: { returnUrl: '/cart' } });
   };
 
   if (isOrderComplete) {
