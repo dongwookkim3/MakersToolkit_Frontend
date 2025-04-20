@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -139,24 +140,24 @@ interface PlanetCardProps {
 
 const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
   const getPlanetColorClass = (planetId: string): string => {
-    switch (planetId) {
-      case 'mercury': return 'from-gray-400 to-gray-500';
-      case 'venus': return 'from-yellow-400 to-yellow-600';
-      case 'earth': return 'from-blue-500 to-blue-400';
-      case 'mars': return 'from-red-600 to-red-400';
-      case 'jupiter': return 'from-amber-500 to-amber-400';
-      case 'saturn': return 'from-yellow-500 to-yellow-300';
-      case 'uranus': return 'from-cyan-500 to-cyan-300';
-      case 'neptune': return 'from-blue-600 to-blue-400';
-      default: return 'from-indigo-500 to-indigo-400';
-    }
+    const colors: Record<string, string> = {
+      mercury: 'from-gray-400 to-gray-500',
+      venus: 'from-yellow-400 to-yellow-600',
+      earth: 'from-blue-500 to-blue-400',
+      mars: 'from-red-600 to-red-400',
+      jupiter: 'from-amber-500 to-amber-400',
+      saturn: 'from-yellow-500 to-yellow-300',
+      uranus: 'from-cyan-500 to-cyan-300',
+      neptune: 'from-blue-600 to-blue-400'
+    };
+    
+    return colors[planetId] || 'from-indigo-500 to-indigo-400';
   };
   
   return (
     <Card className="card-cosmic overflow-hidden">
       <div className="h-48 bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center">
-        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${getPlanetColorClass(planet.id)} spinning`}>
-        </div>
+        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${getPlanetColorClass(planet.id)} spinning`} />
       </div>
       <CardContent className="p-6">
         <h3 className="text-xl font-bold mb-2 text-gradient">{planet.name}</h3>
