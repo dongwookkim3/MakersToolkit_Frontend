@@ -1,12 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
-import { Minus, Plus, ShoppingCart, Trash2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Minus, Plus, ShoppingCart, Trash2, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import StarField from '@/components/StarField';
 import {
   Breadcrumb,
@@ -16,9 +16,69 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { toast } from '@/components/ui/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const CartPage: React.FC = () => {
   const { items, removeItem, updateQuantity, clearCart, totalPrice } = useCart();
+  const [isOrderComplete, setIsOrderComplete] = useState(false);
+  const [isCheckoutDialogOpen, setIsCheckoutDialogOpen] = useState(false);
+
+  const handleCheckout = () => {
+    if (items.length === 0) {
+      toast({
+        title: "장바구니가 비어있습니다",
+        description: "결제하기 전에 상품을 추가해주세요.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    setIsCheckoutDialogOpen(true);
+  };
+
+  const handleCompletePurchase = () => {
+    // 실제 환경에서는 결제 처리 로직이 들어갈 자리
+    setIsCheckoutDialogOpen(false);
+    setIsOrderComplete(true);
+    clearCart();
+    
+    toast({
+      title: "주문이 완료되었습니다!",
+      description: "성공적으로 결제가 완료되었습니다.",
+    });
+  };
+
+  if (isOrderComplete) {
+    return (
+      <div className="min-h-screen relative">
+        <StarField />
+        <Navbar />
+        
+        <main className="pt-24 pb-16 container mx-auto px-4">
+          <div className="glass-card p-12 text-center max-w-md mx-auto">
+            <div className="mb-6">
+              <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
+              <h2 className="text-2xl font-bold mb-2">주문이 완료되었습니다!</h2>
+              <p className="text-gray-400 mb-6">구매해주셔서 감사합니다. 곧 주문 확인 이메일을 보내드리겠습니다.</p>
+            </div>
+            <Button asChild className="bg-cosmic-primary hover:bg-cosmic-primary/90">
+              <Link to="/products">계속 쇼핑하기</Link>
+            </Button>
+          </div>
+        </main>
+        
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen relative">
@@ -159,7 +219,10 @@ const CartPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Button className="w-full bg-cosmic-primary hover:bg-cosmic-primary/90">
+                  <Button 
+                    className="w-full bg-cosmic-primary hover:bg-cosmic-primary/90"
+                    onClick={handleCheckout}
+                  >
                     <ArrowRight className="h-4 w-4 mr-2" />
                     결제하기
                   </Button>
@@ -169,6 +232,44 @@ const CartPage: React.FC = () => {
           </div>
         )}
       </main>
+      
+      <Dialog open={isCheckoutDialogOpen} onOpenChange={setIsCheckoutDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>결제 확인</DialogTitle>
+            <DialogDescription>
+              총 {totalPrice}을 결제하시겠습니까?
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <p>주문 내역:</p>
+            <div className="max-h-40 overflow-auto space-y-2">
+              {items.map((item) => (
+                <div key={item.id} className="flex justify-between items-center">
+                  <span>{item.name} x {item.quantity}</span>
+                  <span>{(parseInt(item.price.replace(/[^0-9]/g, '')) * item.quantity).toLocaleString()}원</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <DialogFooter className="sm:justify-end">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsCheckoutDialogOpen(false)}
+            >
+              취소
+            </Button>
+            <Button
+              type="button"
+              onClick={handleCompletePurchase}
+              className="bg-cosmic-primary hover:bg-cosmic-primary/90"
+            >
+              결제 완료
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       
       <Footer />
     </div>
