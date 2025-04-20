@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StarField from '@/components/StarField';
 import { Button } from '@/components/ui/button';
-import { Cpu, Wifi, Bot, ArrowLeft, Check, ShoppingCart, FileText, Lock } from 'lucide-react';
+import { Cpu, Wifi, Bot, ArrowLeft, Check, ShoppingCart, FileText, Lock, Scale, Plus, Minus } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,6 +15,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCart } from '@/contexts/CartContext';
+import { useCompare, CompareItem } from '@/contexts/CompareContext';
 
 import {
   Dialog,
@@ -50,6 +51,9 @@ const ProductDetailPage = () => {
   const { toast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hasPurchased, setHasPurchased] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const { addItem } = useCart();
+  const { addItem: addToCompare, isItemInCompare, removeItem: removeFromCompare } = useCompare();
   
   // 로그인 폼 유효성 검사 스키마
   const loginFormSchema = z.object({
@@ -232,6 +236,41 @@ const ProductDetailPage = () => {
   ];
   
   const product = products.find(p => p.id === productId);
+
+  const handleAddToCart = () => {
+    if (product) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity,
+        image: product.image
+      });
+    }
+  };
+
+  const handleCompareToggle = () => {
+    if (!product) return;
+    
+    if (isItemInCompare(product.id)) {
+      removeFromCompare(product.id);
+    } else {
+      const compareItem: CompareItem = {
+        id: product.id,
+        name: product.name,
+        category: product.category || '',
+        level: product.level || '',
+        price: product.price,
+        features: product.features
+      };
+      addToCompare(compareItem);
+    }
+  };
+
+  const handleQuantityChange = (value: number) => {
+    if (value < 1) return;
+    setQuantity(value);
+  };
   
   if (!product) {
     return (
@@ -496,82 +535,4 @@ const ProductDetailPage = () => {
                     </div>
                   </div>
                 </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-          
-          <div className="lg:col-span-2">
-            <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 sticky top-24">
-              <h2 className="text-2xl font-bold mb-2">{product.price}</h2>
-              <p className="text-gray-300 mb-6">배송비 포함 가격</p>
-              
-              <div className="space-y-4 mb-8">
-                <Button 
-                  className="w-full bg-cosmic-stardust-teal hover:bg-cosmic-stardust-teal/90"
-                  onClick={handlePurchase}
-                >
-                  <ShoppingCart className="mr-2" /> 구매하기
-                </Button>
-                <Button variant="outline" className="w-full">
-                  문의하기
-                </Button>
-              </div>
-              
-              <div className="border border-white/10 rounded-lg p-4 space-y-3">
-                <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-cosmic-stardust-teal" />
-                  <p>3-5일 내 배송</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-cosmic-stardust-teal" />
-                  <p>1년 기술 지원</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-cosmic-stardust-teal" />
-                  <p>무상 교체 보증 90일</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-cosmic-stardust-teal" />
-                  <p>학교 및 단체 할인 가능</p>
-                </div>
-              </div>
-              
-              {isLoggedIn && (
-                <div className="mt-4 p-4 border border-cosmic-stardust-teal/30 rounded-lg bg-cosmic-stardust-teal/10">
-                  <p className="text-sm">
-                    <span className="font-semibold">로그인 상태:</span> {isLoggedIn ? '로그인됨' : '로그아웃됨'}<br />
-                    <span className="font-semibold">구매 상태:</span> {hasPurchased ? '구매완료' : '미구매'}<br />
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-16 border-t border-white/10 pt-8">
-          <h2 className="text-2xl font-bold mb-6">추천 제품</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products
-              .filter(p => p.id !== productId)
-              .map(relatedProduct => (
-                <Card key={relatedProduct.id} className="overflow-hidden border border-white/10 bg-black/40 backdrop-blur-sm transition-transform hover:scale-105">
-                  <div className="h-40 bg-cover bg-center" style={{ backgroundImage: `url(${relatedProduct.image})` }}></div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{relatedProduct.name}</h3>
-                    <p className="text-gray-300 mb-4">{relatedProduct.description.substring(0, 100)}...</p>
-                    <Button asChild variant="outline" className="w-full">
-                      <Link to={`/products/${relatedProduct.id}`}>자세히 보기</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
-        </div>
-      </main>
-      
-      <Footer />
-    </div>
-  );
-};
-
-export default ProductDetailPage;
+              </

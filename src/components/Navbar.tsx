@@ -2,14 +2,18 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart, Scale } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
+import { useCart } from '@/contexts/CartContext';
+import { useCompare } from '@/contexts/CompareContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
   const { user, signOut, isAdmin } = useAuth();
+  const { itemCount } = useCart();
+  const { items: compareItems } = useCompare();
 
   const navItems = [
     { name: '홈', path: '/' },
@@ -40,6 +44,40 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
+          
+          {/* 장바구니 및 비교 아이콘 */}
+          <div className="flex items-center space-x-3">
+            <Link 
+              to="/compare" 
+              className={cn(
+                "relative p-2 rounded-full transition hover:bg-gray-100",
+                compareItems.length > 0 ? "text-primary" : "text-gray-600"
+              )}
+            >
+              <Scale size={20} />
+              {compareItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-white text-xs flex items-center justify-center">
+                  {compareItems.length}
+                </span>
+              )}
+            </Link>
+            
+            <Link 
+              to="/cart" 
+              className={cn(
+                "relative p-2 rounded-full transition hover:bg-gray-100",
+                itemCount > 0 ? "text-primary" : "text-gray-600"
+              )}
+            >
+              <ShoppingCart size={20} />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-white text-xs flex items-center justify-center">
+                  {itemCount > 9 ? '9+' : itemCount}
+                </span>
+              )}
+            </Link>
+          </div>
+          
           {user ? (
             <div className="flex items-center gap-4">
               {isAdmin && (
@@ -57,12 +95,45 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-gray-600"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center space-x-3">
+          {/* 모바일 장바구니 및 비교 아이콘 */}
+          <Link 
+            to="/compare" 
+            className={cn(
+              "relative p-2 rounded-full transition hover:bg-gray-100",
+              compareItems.length > 0 ? "text-primary" : "text-gray-600"
+            )}
+          >
+            <Scale size={20} />
+            {compareItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-white text-xs flex items-center justify-center">
+                {compareItems.length}
+              </span>
+            )}
+          </Link>
+          
+          <Link 
+            to="/cart" 
+            className={cn(
+              "relative p-2 rounded-full transition hover:bg-gray-100",
+              itemCount > 0 ? "text-primary" : "text-gray-600"
+            )}
+          >
+            <ShoppingCart size={20} />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary text-white text-xs flex items-center justify-center">
+                {itemCount > 9 ? '9+' : itemCount}
+              </span>
+            )}
+          </Link>
+          
+          <button 
+            className="text-gray-600"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

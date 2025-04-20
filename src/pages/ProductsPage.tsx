@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ProductCard from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
 import { Cpu, Wifi, Bot, ChevronDown, ChevronUp, Server, Layers, Codesandbox } from 'lucide-react';
 import {
@@ -12,6 +13,19 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
+export interface Product {
+  id: number;
+  name: string;
+  category: string;
+  level: string;
+  price: string;
+  description: string;
+  features: string[];
+  icon: React.ReactNode;
+  expanded?: boolean;
+  toggleExpand?: (id: number) => void;
+}
 
 const ProductsPage = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -35,7 +49,7 @@ const ProductsPage = () => {
     }
   };
 
-  const products = [
+  const products: Product[] = [
     {
       id: 1,
       name: "아두이노 스타터 키트",
@@ -233,58 +247,16 @@ const ProductsPage = () => {
           </div>
         </div>
         
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
-            <div 
-              key={product.id} 
-              id={`product-${product.id}`}
-              className="border rounded-lg bg-white shadow-sm overflow-hidden transition-transform hover:shadow-md"
-            >
-              <div className="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    {product.icon}
-                  </div>
-                  <div>
-                    <h2 className="text-2xl font-bold">{product.name}</h2>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-primary">{product.category}</span>
-                      <span className="text-lg font-semibold">{product.price}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 w-full md:w-auto">
-                  <Button asChild variant="outline" className="w-full md:w-auto">
-                    <Link to={`/products/${product.id}`}>
-                      상세 정보
-                    </Link>
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="icon"
-                    onClick={() => toggleExpand(product.id)}
-                    aria-label={expandedId === product.id ? "접기" : "펼치기"}
-                  >
-                    {expandedId === product.id ? <ChevronUp /> : <ChevronDown />}
-                  </Button>
-                </div>
-              </div>
-              
-              {expandedId === product.id && (
-                <div className="p-6 pt-0 border-t">
-                  <p className="text-gray-600 mb-4">{product.description}</p>
-                  <h3 className="font-semibold mb-2">포함 구성품:</h3>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {product.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
+            <ProductCard
+              key={product.id}
+              product={{
+                ...product,
+                expanded: expandedId === product.id,
+                toggleExpand
+              }}
+            />
           ))}
         </div>
       </main>
