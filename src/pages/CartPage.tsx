@@ -1,12 +1,12 @@
-
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
-import { Minus, Plus, ShoppingCart, Trash2, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Minus, Plus, ShoppingCart, Trash2, ArrowLeft, ArrowRight, CheckCircle, LogIn } from 'lucide-react';
 import StarField from '@/components/StarField';
 import {
   Breadcrumb,
@@ -28,8 +28,11 @@ import {
 
 const CartPage: React.FC = () => {
   const { items, removeItem, updateQuantity, clearCart, totalPrice } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [isCheckoutDialogOpen, setIsCheckoutDialogOpen] = useState(false);
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
 
   const handleCheckout = () => {
     if (items.length === 0) {
@@ -38,6 +41,12 @@ const CartPage: React.FC = () => {
         description: "결제하기 전에 상품을 추가해주세요.",
         variant: "destructive"
       });
+      return;
+    }
+    
+    // 로그인 여부 확인
+    if (!user) {
+      setIsLoginDialogOpen(true);
       return;
     }
     
@@ -54,6 +63,11 @@ const CartPage: React.FC = () => {
       title: "주문이 완료되었습니다!",
       description: "성공적으로 결제가 완료되었습니다.",
     });
+  };
+
+  const handleGoToLogin = () => {
+    setIsLoginDialogOpen(false);
+    navigate('/auth');
   };
 
   if (isOrderComplete) {
@@ -233,6 +247,7 @@ const CartPage: React.FC = () => {
         )}
       </main>
       
+      {/* 결제 확인 다이얼로그 */}
       <Dialog open={isCheckoutDialogOpen} onOpenChange={setIsCheckoutDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -266,6 +281,38 @@ const CartPage: React.FC = () => {
               className="bg-cosmic-primary hover:bg-cosmic-primary/90"
             >
               결제 완료
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* 로그인 유도 다이얼로그 */}
+      <Dialog open={isLoginDialogOpen} onOpenChange={setIsLoginDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>로그인이 필요합니다</DialogTitle>
+            <DialogDescription>
+              결제를 진행하기 위해서는 로그인이 필요합니다.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <p>로그인 페이지로 이동하시겠습니까?</p>
+          </div>
+          <DialogFooter className="sm:justify-end">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsLoginDialogOpen(false)}
+            >
+              취소
+            </Button>
+            <Button
+              type="button"
+              onClick={handleGoToLogin}
+              className="bg-cosmic-primary hover:bg-cosmic-primary/90"
+            >
+              <LogIn className="h-4 w-4 mr-2" />
+              로그인 페이지로 이동
             </Button>
           </DialogFooter>
         </DialogContent>
