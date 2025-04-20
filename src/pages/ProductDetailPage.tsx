@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -535,4 +536,118 @@ const ProductDetailPage = () => {
                     </div>
                   </div>
                 </TabsContent>
-              </
+              </Tabs>
+            </div>
+          </div>
+          
+          <div className="lg:col-span-2">
+            <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-lg p-6 sticky top-24">
+              <h2 className="text-2xl font-bold mb-2">{product.price}</h2>
+              <p className="text-gray-400 mb-6">{product.description}</p>
+              
+              <div className="space-y-6">
+                <div className="flex flex-col space-y-2">
+                  <label htmlFor="quantity" className="text-sm font-medium">수량</label>
+                  <div className="flex items-center">
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      onClick={() => handleQuantityChange(quantity - 1)}
+                      disabled={quantity <= 1}
+                    >
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="w-12 text-center">{quantity}</span>
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      onClick={() => handleQuantityChange(quantity + 1)}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col space-y-4">
+                  <Button onClick={handleAddToCart} className="w-full">
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    장바구니에 추가
+                  </Button>
+                  
+                  <Button onClick={handlePurchase} className="w-full" variant="secondary">
+                    지금 구매하기
+                  </Button>
+                  
+                  <Button 
+                    onClick={handleCompareToggle} 
+                    variant="outline" 
+                    className="w-full"
+                  >
+                    <Scale className="mr-2 h-4 w-4" />
+                    {isItemInCompare(product.id) ? '비교 목록에서 제거' : '비교 목록에 추가'}
+                  </Button>
+                </div>
+                
+                <div className="border-t border-white/10 pt-4">
+                  <h3 className="font-medium mb-2">제품 정보</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex justify-between">
+                      <span className="text-gray-400">카테고리</span>
+                      <span>{product.category}</span>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-gray-400">난이도</span>
+                      <span>{product.level}</span>
+                    </li>
+                    <li className="flex justify-between">
+                      <span className="text-gray-400">배송</span>
+                      <span>무료배송 (2-3일 소요)</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold mb-6">연관 제품</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {products
+              .filter(p => p.id !== productId)
+              .map(relatedProduct => (
+                <Card key={relatedProduct.id} className="glass-card overflow-hidden">
+                  <div 
+                    className="h-48 bg-cover bg-center relative" 
+                    style={{ backgroundImage: `url(${relatedProduct.image})` }}
+                  >
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="absolute bottom-4 left-4">
+                      <span className="px-2 py-1 text-xs bg-black/50 backdrop-blur-sm rounded-full text-white">
+                        {relatedProduct.level}
+                      </span>
+                    </div>
+                  </div>
+                  <CardContent className="p-5">
+                    <h3 className="text-lg font-bold mb-2">{relatedProduct.name}</h3>
+                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">{relatedProduct.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">{relatedProduct.price}</span>
+                      <Button asChild size="sm">
+                        <Link to={`/products/${relatedProduct.id}`}>자세히 보기</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            }
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default ProductDetailPage;
