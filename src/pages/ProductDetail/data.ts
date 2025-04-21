@@ -10,6 +10,11 @@ import {
   Codesandbox as CodesandboxIcon
 } from 'lucide-react';
 
+// Create a function to generate icon components
+const createIconComponent = (IconComponent: React.FC<any>) => {
+  return React.createElement(IconComponent, { className: "w-8 h-8" });
+};
+
 export const productsData: Product[] = [
   {
     id: 1,
@@ -26,7 +31,7 @@ export const productsData: Product[] = [
       "상세한 한글 매뉴얼",
       "단계별 15개 프로젝트 가이드"
     ],
-    icon: <Cpu className="w-8 h-8" />
+    icon: createIconComponent(Cpu)
   },
   {
     id: 2,
@@ -43,7 +48,7 @@ export const productsData: Product[] = [
       "모바일 앱 연동 튜토리얼",
       "10개의 IoT 프로젝트 예제"
     ],
-    icon: <Wifi className="w-8 h-8" />
+    icon: createIconComponent(Wifi)
   },
   {
     id: 3,
@@ -60,7 +65,7 @@ export const productsData: Product[] = [
       "로봇 프레임 및 바퀴",
       "자율주행 알고리즘 튜토리얼"
     ],
-    icon: <Bot className="w-8 h-8" />
+    icon: createIconComponent(Bot)
   },
   {
     id: 4,
@@ -77,7 +82,7 @@ export const productsData: Product[] = [
       "다양한 통신 모듈",
       "고급 펌웨어 개발 가이드"
     ],
-    icon: <Cpu className="w-8 h-8" />
+    icon: createIconComponent(Cpu)
   },
   {
     id: 5,
@@ -94,7 +99,7 @@ export const productsData: Product[] = [
       "카메라 모듈",
       "Python 기반 데이터 수집 및 분석 가이드"
     ],
-    icon: <ServerIcon className="w-8 h-8" />
+    icon: createIconComponent(ServerIcon)
   },
   {
     id: 6,
@@ -111,7 +116,7 @@ export const productsData: Product[] = [
       "원격 제어 앱 개발 가이드",
       "MQTT 프로토콜 실습"
     ],
-    icon: <Wifi className="w-8 h-8" />
+    icon: createIconComponent(Wifi)
   },
   {
     id: 7,
@@ -128,7 +133,7 @@ export const productsData: Product[] = [
       "클라우드 연동 가이드",
       "AI 응용 프로젝트 예제"
     ],
-    icon: <CodesandboxIcon className="w-8 h-8" />
+    icon: createIconComponent(CodesandboxIcon)
   },
   {
     id: 8,
@@ -145,6 +150,6 @@ export const productsData: Product[] = [
       "저전력 블루투스 통신",
       "배터리 관리 시스템"
     ],
-    icon: <LayersIcon className="w-8 h-8" />
+    icon: createIconComponent(LayersIcon)
   }
 ];
