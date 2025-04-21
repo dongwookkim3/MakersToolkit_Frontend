@@ -13,7 +13,7 @@ import GalaxiesPage from "./pages/GalaxiesPage";
 import EventsPage from "./pages/EventsPage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductDetailPage from "./pages/ProductDetail";
 import CartPage from "./pages/CartPage";
 import ComparePage from "./pages/ComparePage";
 import ContactPage from "./pages/ContactPage";

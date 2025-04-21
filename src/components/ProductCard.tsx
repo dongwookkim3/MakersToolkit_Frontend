@@ -5,20 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Scale } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
-import { useCompare, CompareItem } from '@/contexts/CompareContext';
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  level: string;
-  price: string;
-  description: string;
-  features: string[];
-  icon: React.ReactNode;
-  expanded?: boolean;
-  toggleExpand?: (id: number) => void;
-}
+import { useCompare } from '@/contexts/CompareContext';
+import { Product, CompareItem } from '@/types/product';
 
 interface ProductCardProps {
   product: Product;
@@ -34,7 +22,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'default' 
       id: product.id,
       name: product.name,
       price: product.price,
-      quantity: 1
+      quantity: 1,
+      image: product.image
     });
   };
 

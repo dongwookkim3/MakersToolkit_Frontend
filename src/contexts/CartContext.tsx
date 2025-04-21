@@ -1,14 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
-
-export interface CartItem {
-  id: number;
-  name: string;
-  price: string;
-  quantity: number;
-  image?: string;
-}
+import { CartItem } from '@/types/product';
 
 interface CartContextType {
   items: CartItem[];

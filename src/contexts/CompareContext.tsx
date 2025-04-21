@@ -1,15 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
-
-export interface CompareItem {
-  id: number;
-  name: string;
-  category: string;
-  level: string;
-  price: string;
-  features: string[];
-}
+import { CompareItem } from '@/types/product';
 
 interface CompareContextType {
   items: CompareItem[];
