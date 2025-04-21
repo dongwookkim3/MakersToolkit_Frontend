@@ -7,7 +7,24 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useCompare } from '@/contexts/CompareContext';
-import { Cpu, Wifi, Bot, ArrowLeft, Check, ShoppingCart, FileText, Lock, Scale, Plus, Minus, LogIn, Server, Layers, Box } from 'lucide-react';
+import { 
+  Cpu, 
+  Wifi, 
+  Bot, 
+  ArrowLeft, 
+  Check, 
+  ShoppingCart, 
+  FileText, 
+  Lock, 
+  Scale, 
+  Plus, 
+  Minus, 
+  LogIn, 
+  Server as ServerIcon, 
+  Layers as LayersIcon, 
+  Box,
+  Codesandbox as CodesandboxIcon
+} from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -121,7 +138,7 @@ const products: Product[] = [
       "카메라 모듈",
       "Python 기반 데이터 수집 및 분석 가이드"
     ],
-    icon: <Server className="w-8 h-8" />
+    icon: <ServerIcon className="w-8 h-8" />
   },
   {
     id: 6,
@@ -155,7 +172,7 @@ const products: Product[] = [
       "클라우드 연동 가이드",
       "AI 응용 프로젝트 예제"
     ],
-    icon: <Cpu className="w-8 h-8" />
+    icon: <CodesandboxIcon className="w-8 h-8" />
   },
   {
     id: 8,
@@ -172,7 +189,7 @@ const products: Product[] = [
       "저전력 블루투스 통신",
       "배터리 관리 시스템"
     ],
-    icon: <Layers className="w-8 h-8" />
+    icon: <LayersIcon className="w-8 h-8" />
   }
 ];
 
@@ -237,7 +254,6 @@ const ProductDetailPage = () => {
         id: product.id,
         name: product.name,
         price: product.price,
-        image: null,
       });
       toast({
         title: "비교 목록에 추가",
