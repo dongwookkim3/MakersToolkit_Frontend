@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -250,10 +251,14 @@ const ProductDetailPage = () => {
         description: `${product.name}이(가) 비교 목록에서 제거되었습니다.`,
       });
     } else {
+      // Pass all required properties from the product to match CompareItem interface
       addToCompare({
         id: product.id,
         name: product.name,
+        category: product.category,
+        level: product.level,
         price: product.price,
+        features: product.features
       });
       toast({
         title: "비교 목록에 추가",
