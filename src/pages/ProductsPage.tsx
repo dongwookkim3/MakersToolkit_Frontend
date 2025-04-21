@@ -14,6 +14,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Product } from '@/types/product';
+import GalaxyBackground from '@/components/GalaxyBackground';
 
 const ProductsPage = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -181,9 +182,8 @@ const ProductsPage = () => {
     : products;
 
   return (
-    <div className="min-h-screen">
+    <GalaxyBackground>
       <Navbar />
-      
       <main className="pt-24 pb-16 container mx-auto px-4">
         <Breadcrumb className="mb-6">
           <BreadcrumbList>
@@ -248,9 +248,8 @@ const ProductsPage = () => {
           ))}
         </div>
       </main>
-      
       <Footer />
-    </div>
+    </GalaxyBackground>
   );
 };
 
