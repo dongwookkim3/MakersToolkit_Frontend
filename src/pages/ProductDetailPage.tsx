@@ -7,15 +7,8 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useCompare } from '@/contexts/CompareContext';
-import { Cpu, Wifi, Bot, ArrowLeft, Check, ShoppingCart, FileText, Lock, Scale, Plus, Minus, LogIn } from 'lucide-react';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Cpu, Wifi, Bot, ArrowLeft, Check, ShoppingCart, FileText, Lock, Scale, Plus, Minus, LogIn, Server, Layers, Box } from 'lucide-react';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { useToast } from "@/components/ui/use-toast";
 import {
   Dialog,
@@ -35,6 +28,13 @@ interface Product {
   description: string;
   features: string[];
   icon: React.ReactNode;
+}
+
+interface CompareItem {
+  id: string;
+  name: string;
+  image: string;
+  // ... other properties
 }
 
 const products: Product[] = [
@@ -155,7 +155,7 @@ const products: Product[] = [
       "클라우드 연동 가이드",
       "AI 응용 프로젝트 예제"
     ],
-    icon: <Codesandbox className="w-8 h-8" />
+    icon: <Cpu className="w-8 h-8" />
   },
   {
     id: 8,
