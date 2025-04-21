@@ -13,19 +13,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-
-export interface Product {
-  id: number;
-  name: string;
-  category: string;
-  level: string;
-  price: string;
-  description: string;
-  features: string[];
-  icon: React.ReactNode;
-  expanded?: boolean;
-  toggleExpand?: (id: number) => void;
-}
+import { Product } from '@/types/product';
 
 const ProductsPage = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);

@@ -11,6 +11,8 @@ export interface Product {
   features: string[];
   icon?: React.ReactNode;
   image?: string;
+  expanded?: boolean;
+  toggleExpand?: (id: number) => void;
 }
 
 export interface CartItem {
