@@ -18,8 +18,10 @@ const GalaxyBackground: React.FC<React.PropsWithChildren> = ({ children }) => {
         style={{ background: "radial-gradient(circle at 40% 60%, #33c3f080 0%, #abecf000 80%)" }}/>
       <div className="fixed top-1/2 left-[60vw] w-[40vw] h-[20vw] -z-10 blur-2xl rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle at 70% 40%, #d6bcfad0 0%, #0a0f2900 80%)" }}/>
-      {/* 별 효과 */}
-      <StarField />
+      {/* 별 빛나는 효과 (살짝 애니메이션) */}
+      <div className="fixed inset-0 -z-15 pointer-events-none opacity-75">
+        <StarField />
+      </div>
       {/* 메인 컨텐츠 */}
       <div className="relative z-10">{children}</div>
     </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StarField from '@/components/StarField';
+import GalaxyBackground from '@/components/GalaxyBackground';
 import { Product } from '@/types/product';
 import { useAuth } from '@/contexts/AuthContext';
 import ProductHeader from './components/ProductHeader';
@@ -12,14 +12,6 @@ import ProductDetails from './components/ProductDetails';
 import ProductFeatures from './components/ProductFeatures';
 import LoginDialog from './components/LoginDialog';
 import { useToast } from "@/components/ui/use-toast";
-import { 
-  Cpu, 
-  Wifi, 
-  Bot, 
-  Server as ServerIcon, 
-  Layers as LayersIcon, 
-  Codesandbox as CodesandboxIcon
-} from 'lucide-react';
 import { productsData } from './data';
 
 const ProductDetailPage = () => {
@@ -76,8 +68,7 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
-      <StarField />
+    <GalaxyBackground>
       <Navbar />
       
       <main className="pt-24 pb-16 container mx-auto px-4">
@@ -104,7 +95,7 @@ const ProductDetailPage = () => {
       />
       
       <Footer />
-    </div>
+    </GalaxyBackground>
   );
 };
 

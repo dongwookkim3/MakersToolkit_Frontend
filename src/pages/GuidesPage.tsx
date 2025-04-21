@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import GalaxyBackground from '@/components/GalaxyBackground';
 
 const GuidesPage = () => {
   const guides = [
@@ -61,7 +61,7 @@ const GuidesPage = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <GalaxyBackground>
       <Navbar />
       <div className="flex-grow">
         <div className="bg-primary/10 py-12">
@@ -96,7 +96,7 @@ const GuidesPage = () => {
             <TabsContent value="all" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {guides.map((guide) => (
-                  <Card key={guide.id} className="overflow-hidden hover:shadow-lg transition-all">
+                  <Card key={guide.id} className="overflow-hidden hover:shadow-lg transition-all glass-card">
                     <div className="aspect-video relative overflow-hidden">
                       <img 
                         src={guide.image} 
@@ -152,7 +152,7 @@ const GuidesPage = () => {
             <TabsContent value="beginner" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {guides.filter(g => g.level === "초급").map((guide) => (
-                  <Card key={guide.id} className="overflow-hidden hover:shadow-lg transition-all">
+                  <Card key={guide.id} className="overflow-hidden hover:shadow-lg transition-all glass-card">
                     {/* Same card content as above */}
                     <div className="aspect-video relative overflow-hidden">
                       <img 
@@ -193,7 +193,7 @@ const GuidesPage = () => {
             </Button>
           </div>
 
-          <div className="mt-20 bg-gray-50 rounded-xl p-8">
+          <div className="mt-20 bg-gray-50 rounded-xl p-8 neo-blur">
             <h2 className="text-2xl font-bold mb-6 text-center">교육자료 신청</h2>
             <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
               학교, 교육기관을 위한 특별 교육자료를 제공해 드립니다. 
@@ -206,7 +206,7 @@ const GuidesPage = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </GalaxyBackground>
   );
 };
 
