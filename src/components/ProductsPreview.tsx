@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { TrendingUp } from 'lucide-react';
+import { TrendingUp, ArrowRight, Star } from 'lucide-react';
 
 const ProductsPreview = () => {
   const products = [
@@ -11,94 +10,120 @@ const ProductsPreview = () => {
       id: 1,
       name: "아두이노 스타터 키트",
       description: "입문자를 위한 기본 아두이노 키트로, LED, 센서, 모터 등 다양한 부품 포함",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      fallbackImage: "bg-gradient-to-br from-blue-500 to-blue-600",
-      orderCount: 458
+      price: "89,000원",
+      rating: 4.8,
+      orderCount: 458,
+      level: "초급",
+      features: ["Arduino UNO R3", "15개 프로젝트", "한글 매뉴얼"]
     },
     {
       id: 2,
       name: "IoT 학습 패키지",
       description: "사물인터넷 기술을 배울 수 있는 WiFi 모듈, 센서, 클라우드 연동 키트",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      fallbackImage: "bg-gradient-to-br from-blue-400 to-blue-500",
-      orderCount: 372
+      price: "129,000원",
+      rating: 4.9,
+      orderCount: 372,
+      level: "중급",
+      features: ["ESP8266 WiFi", "클라우드 연동", "모바일 앱"]
     },
     {
       id: 3,
       name: "로보틱스 프로젝트 키트",
       description: "로봇 제작을 위한 모터, 서보, 구조물 및 프로그래밍 가이드 포함",
-      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      fallbackImage: "bg-gradient-to-br from-blue-600 to-blue-700",
-      orderCount: 289
-    },
-    {
-      id: 5,
-      name: "라즈베리 파이 센서 키트",
-      description: "라즈베리 파이와 함께 사용할 수 있는 센서 모음 키트, 환경 및 모션 감지 센서 포함",
-      image: "https://images.unsplash.com/photo-1601900554744-8d3be1fc2fa0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      fallbackImage: "bg-gradient-to-br from-blue-500 to-blue-600",
-      orderCount: 312
-    },
-    {
-      id: 7,
-      name: "AIoT 개발자 키트",
-      description: "인공지능과 사물인터넷을 결합한 고급 개발 프로젝트 키트",
-      image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      fallbackImage: "bg-gradient-to-br from-blue-400 to-blue-500",
-      orderCount: 198
+      price: "159,000원",
+      rating: 4.7,
+      orderCount: 289,
+      level: "고급",
+      features: ["DC/서보 모터", "센서 통합", "자율주행"]
     }
   ];
 
-  // Sort products by order count (highest first) and get top 3
-  const topProducts = [...products].sort((a, b) => b.orderCount - a.orderCount).slice(0, 3);
-
   return (
-    <div className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="section-padding bg-gray-50 dark:bg-gray-900">
+      <div className="container-custom">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">인기 교육 키트</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            가장 많이 찾는 임베디드 교육 키트를 소개합니다.
+          <div className="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
+            <TrendingUp className="w-4 h-4 mr-2" />
+            인기 제품
+          </div>
+          <h2 className="heading-lg mb-4">인기 교육 키트</h2>
+          <p className="text-body max-w-2xl mx-auto">
+            가장 많이 찾는 임베디드 교육 키트를 소개합니다. 
+            검증된 품질과 체계적인 학습 과정으로 만족도가 높은 제품들입니다.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {topProducts.map((product) => (
-            <Card key={product.id} className="product-card overflow-hidden border">
-              <div 
-                className="h-48 bg-cover bg-center" 
-                style={{ backgroundImage: `url(${product.image})` }}
-              >
-                <div className={`h-full w-full ${product.fallbackImage} opacity-0`} 
-                  onError={(e) => {
-                    e.currentTarget.classList.remove('opacity-0');
-                  }}
-                />
+        <div className="grid-responsive mb-12">
+          {products.map((product) => (
+            <Card key={product.id} className="card-modern hover-lift group">
+              <div className="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-t-lg flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/10"></div>
+                <div className="relative w-24 h-24 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white rounded-xl shadow-lg"></div>
+                </div>
+                <div className="absolute top-4 right-4">
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    product.level === '초급' ? 'bg-green-100 text-green-700' :
+                    product.level === '중급' ? 'bg-yellow-100 text-yellow-700' :
+                    'bg-red-100 text-red-700'
+                  }`}>
+                    {product.level}
+                  </span>
+                </div>
               </div>
+              
               <CardContent className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold">{product.name}</h3>
-                  <div className="flex items-center text-primary text-sm font-medium">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                    {product.name}
+                  </h3>
+                  <div className="flex items-center text-sm text-amber-600">
+                    <Star className="w-4 h-4 fill-current mr-1" />
+                    <span className="font-medium">{product.rating}</span>
+                  </div>
+                </div>
+                
+                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
+                  {product.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {product.features.map((feature, index) => (
+                    <span key={index} className="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded text-xs">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex justify-between items-center mb-4">
+                  <div className="text-2xl font-bold text-primary">{product.price}</div>
+                  <div className="flex items-center text-sm text-gray-500">
                     <TrendingUp className="w-4 h-4 mr-1" />
                     <span>{product.orderCount}개 판매</span>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4">{product.description}</p>
-                <Button asChild variant="outline" className="w-full">
-                  <Link to={`/products/${product.id}`}>자세히 보기</Link>
+                
+                <Button asChild variant="outline" className="w-full group">
+                  <Link to={`/products/${product.id}`} className="flex items-center justify-center">
+                    자세히 보기
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button asChild className="bg-primary hover:bg-primary/90">
-            <Link to="/products">모든 제품 보기</Link>
+        <div className="text-center">
+          <Button asChild size="lg" className="btn-primary group">
+            <Link to="/products" className="flex items-center">
+              모든 제품 보기
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+            </Link>
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

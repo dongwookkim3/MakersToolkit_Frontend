@@ -1,19 +1,16 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ProductsPreview from '@/components/ProductsPreview';
 import FeaturesSection from '@/components/FeaturesSection';
 import Footer from '@/components/Footer';
-import DynamicBackground from '@/components/DynamicBackground';
 
 const Index = () => {
   return (
-    <div className="min-h-screen overflow-x-hidden relative">
-      <DynamicBackground />
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Navbar />
       
-      <main className="relative">
+      <main>
         <HeroSection />
         <ProductsPreview />
         <FeaturesSection />
